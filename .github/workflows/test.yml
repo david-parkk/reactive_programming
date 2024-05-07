@@ -8,13 +8,12 @@
 name: test
 
 on:
-  pull_request:
-    branches: [ "main" ]
-  merge_group:
-    types: [checks_requested]
+  issue_comment:
+    types: [created, edited]
 
 jobs:
   deploy:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠타버스') && contains(github.event.comment.body, '이벤트
     runs-on: ubuntu-latest
     permissions:
       write-all
