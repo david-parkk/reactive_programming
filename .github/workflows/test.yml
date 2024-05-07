@@ -39,8 +39,8 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🕊️ PR #${{ steps.automerge.outputs.pullRequestNumber }}이 머지되었습니다.'
+              body: '🕊️ PR #${{ issue_number }}이 머지되었습니다.'
             })
-
+      
         # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push
       
