@@ -9,8 +9,10 @@ name: test
 
 on:
   pull_request:
-  merge_group:
-    branches: [ "main" ]
+    types:
+      - auto_merge_enabled
+    branches:
+      - main
 
 jobs:
   deploy:
