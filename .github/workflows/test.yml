@@ -27,17 +27,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-        # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
-        # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
-
-      - name: Build with Gradle Wrapper
-        run: ./gradlew build
+      - name: Build test
+        run: |
+          echo "action을 시도합니다"
+      - name: Notify
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🕊️ PR #${{ steps.automerge.outputs.pullRequestNumber }}이 머지되었습니다.'
+            })
 
         # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push
       
