@@ -42,4 +42,8 @@ jobs:
               body: '🕊️ PR #${{ github.event.pull_request.number }}이 머지되었습니다.'
             })  
         # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: 자동 배포
       
